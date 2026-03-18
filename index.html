@@ -3,58 +3,90 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>XR Escena</title>
+    <title>XR Escena Final</title>
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
   </head>
 
   <body>
-    <a-scene>
+    <a-scene shadow="type: pcfsoft">
 
 ```
   <!-- 📦 Assets -->
   <a-assets>
-    <!-- Cambia aquí si usas Optimus -->
-    <a-asset-item id="modelo" src="models/bandablend.glb"></a-asset-item>
+    <a-asset-item id="modelo" src="models/Optimus.glb"></a-asset-item>
+
+    <img id="img1" src="cuadros/vale.jpeg">
+    <img id="img2" src="cuadros/barca.jpg">
+    <img id="img3" src="cuadros/ester.jpg">
+    <img id="img4" src="cuadros/musho.jpg">
   </a-assets>
 
-  <!-- 🧍 Cámara con movimiento -->
+  <!-- 🎮 Cámara -->
   <a-entity position="0 1.6 3">
     <a-camera wasd-controls look-controls></a-camera>
   </a-entity>
 
-  <!-- 🌍 Iluminación -->
-  <a-light type="ambient" intensity="0.6"></a-light>
-  <a-light type="directional" position="2 4 2" intensity="0.8"></a-light>
+  <!-- 💡 ILUMINACIÓN MEJORADA -->
+  <a-light type="ambient" intensity="0.35"></a-light>
 
-  <!-- 🧱 PISO -->
-  <a-plane rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
+  <a-light 
+    type="directional" 
+    position="2 4 2" 
+    intensity="0.6"
+    castShadow="true">
+  </a-light>
 
-  <!-- 🧱 PAREDES -->
-  <!-- Fondo -->
+  <!-- 🧱 Piso -->
+  <a-plane 
+    rotation="-90 0 0" 
+    width="10" 
+    height="10" 
+    color="#7BC8A4"
+    shadow="receive: true">
+  </a-plane>
+
+  <!-- 🧱 Paredes -->
   <a-box position="0 2 -5" depth="0.2" height="4" width="10" color="#FF6B6B"></a-box>
-  <!-- Frente -->
   <a-box position="0 2 5" depth="0.2" height="4" width="10" color="#4ECDC4"></a-box>
-  <!-- Izquierda -->
   <a-box position="-5 2 0" depth="10" height="4" width="0.2" color="#FFD93D"></a-box>
-  <!-- Derecha -->
   <a-box position="5 2 0" depth="10" height="4" width="0.2" color="#6A4C93"></a-box>
 
-  <!-- 🧱 TECHO -->
+  <!-- 🧱 Techo -->
   <a-plane position="0 4 0" rotation="90 0 0" width="10" height="10" color="#CCCCCC"></a-plane>
 
-  <!-- 🤖 MODELO EN EL CENTRO -->
+  <!-- 🤖 MODELO -->
   <a-entity 
     gltf-model="#modelo" 
-    position="0 0 -1" 
-    scale="1 1 1">
+    position="-0.7 0 -1" 
+    scale="0.1 0.1 0.1"
+    shadow="cast: true">
   </a-entity>
 
-  <!-- 🛢️ TANQUES (cilindros) -->
+  <!-- 🛢️ TANQUE IZQUIERDO (DETALLADO) -->
+  <a-cylinder position="-2.5 1 -2" radius="0.6" height="2" color="#888" shadow="cast: true"></a-cylinder>
+  <a-cylinder position="-2.5 2.2 -2" radius="0.65" height="0.3" color="#666"></a-cylinder>
+  <a-cylinder position="-2.5 0.1 -2" radius="0.7" height="0.2" color="#555"></a-cylinder>
+  <a-box position="-2.5 2.6 -2" depth="0.3" height="0.3" width="0.3" color="#444"></a-box>
+  <a-cylinder position="-2.5 1 -1.2" radius="0.1" height="1.5" rotation="90 0 0" color="#999"></a-cylinder>
+
+  <!-- 🛢️ TANQUE DERECHO (DETALLADO) -->
+  <a-cylinder position="2.5 1 -2" radius="0.6" height="2" color="#888" shadow="cast: true"></a-cylinder>
+  <a-cylinder position="2.5 2.2 -2" radius="0.65" height="0.3" color="#666"></a-cylinder>
+  <a-cylinder position="2.5 0.1 -2" radius="0.7" height="0.2" color="#555"></a-cylinder>
+  <a-box position="2.5 2.6 -2" depth="0.3" height="0.3" width="0.3" color="#444"></a-box>
+  <a-cylinder position="2.5 1 -1.2" radius="0.1" height="1.5" rotation="90 0 0" color="#999"></a-cylinder>
+
+  <!-- 🖼️ CUADROS (MÁS GRANDES Y SEPARADOS DE LA PARED) -->
+
+  <!-- Fondo -->
+  <a-plane position="-2 2 -4.8" width="2.8" height="2" material="src: #img1"></a-plane>
+  <a-plane position="2 2 -4.8" width="2.8" height="2" material="src: #img2"></a-plane>
+
   <!-- Izquierda -->
-  <a-cylinder position="-2 1 -2" radius="0.5" height="2" color="#888"></a-cylinder>
+  <a-plane position="-4.8 2 0" rotation="0 90 0" width="2.8" height="2" material="src: #img3"></a-plane>
 
   <!-- Derecha -->
-  <a-cylinder position="2 1 -2" radius="0.5" height="2" color="#888"></a-cylinder>
+  <a-plane position="4.8 2 0" rotation="0 -90 0" width="2.8" height="2" material="src: #img4"></a-plane>
 
   <!-- 🌌 Fondo -->
   <a-sky color="#ECECEC"></a-sky>
