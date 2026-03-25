@@ -11,19 +11,6 @@
     <a-scene shadow="type: pcfsoft">
 
 ```
- <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>XR Escena Final</title>
-    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-  </head>
-
-  <body>
-    <a-scene shadow="type: pcfsoft">
-
-```
   <!-- 📦 Assets -->
   <a-assets>
     <a-asset-item id="modelo" src="models/Optimus.glb"></a-asset-item>
@@ -34,19 +21,19 @@
     <img id="img4" src="cuadros/musho.jpg">
   </a-assets>
 
-  <!-- 🎮 Cámara -->
-  <a-entity position="0 1.6 3">
-    <a-camera wasd-controls look-controls></a-camera>
+  <!-- 🎮 CAMERA RIG (ARREGLADO) -->
+  <a-entity id="rig" position="0 1.6 3">
+    <a-camera look-controls wasd-controls></a-camera>
   </a-entity>
 
-  <!-- 💡 Iluminación -->
+  <!-- 💡 Luz -->
   <a-light type="ambient" intensity="0.35"></a-light>
-  <a-light type="directional" position="2 4 2" intensity="0.6" castShadow="true"></a-light>
+  <a-light type="directional" position="2 4 2" intensity="0.3" castShadow="true"></a-light>
 
-  <!-- 🧱 Piso (más largo) -->
-  <a-plane rotation="-90 0 0" width="10" height="20" color="#7BC8A4" shadow="receive: true"></a-plane>
+  <!-- 🧱 Piso -->
+  <a-plane rotation="-90 0 0" width="10" height="20" color="#7BC8A4"></a-plane>
 
-  <!-- 🧱 Paredes extendidas -->
+  <!-- 🧱 Paredes -->
   <a-box position="0 2 -10" depth="0.2" height="4" width="10" color="#FF6B6B"></a-box>
   <a-box position="0 2 10" depth="0.2" height="4" width="10" color="#4ECDC4"></a-box>
   <a-box position="-5 2 0" depth="20" height="4" width="0.2" color="#FFD93D"></a-box>
@@ -59,13 +46,22 @@
   <a-entity 
     gltf-model="#modelo" 
     position="-0.7 0 -1" 
-    scale="0.1 0.1 0.1"
-    shadow="cast: true">
+    scale="0.1 0.1 0.1">
   </a-entity>
 
-  <!-- 🛢️ TANQUES -->
+  <!-- 🛢️ TANQUE IZQUIERDO (DETALLADO) -->
   <a-cylinder position="-2.5 1 -2" radius="0.6" height="2" color="#888"></a-cylinder>
+  <a-cylinder position="-2.5 2.2 -2" radius="0.65" height="0.3" color="#666"></a-cylinder>
+  <a-cylinder position="-2.5 0.1 -2" radius="0.7" height="0.2" color="#555"></a-cylinder>
+  <a-box position="-2.5 2.6 -2" depth="0.3" height="0.3" width="0.3" color="#444"></a-box>
+  <a-cylinder position="-2.5 1 -1.2" radius="0.1" height="1.5" rotation="90 0 0" color="#999"></a-cylinder>
+
+  <!-- 🛢️ TANQUE DERECHO -->
   <a-cylinder position="2.5 1 -2" radius="0.6" height="2" color="#888"></a-cylinder>
+  <a-cylinder position="2.5 2.2 -2" radius="0.65" height="0.3" color="#666"></a-cylinder>
+  <a-cylinder position="2.5 0.1 -2" radius="0.7" height="0.2" color="#555"></a-cylinder>
+  <a-box position="2.5 2.6 -2" depth="0.3" height="0.3" width="0.3" color="#444"></a-box>
+  <a-cylinder position="2.5 1 -1.2" radius="0.1" height="1.5" rotation="90 0 0" color="#999"></a-cylinder>
 
   <!-- 🖼️ CUADROS -->
   <a-plane position="-2 2 -9.8" width="2.8" height="2" material="src: #img1"></a-plane>
@@ -73,40 +69,24 @@
   <a-plane position="-4.8 2 0" rotation="0 90 0" width="2.8" height="2" material="src: #img3"></a-plane>
   <a-plane position="4.8 2 0" rotation="0 -90 0" width="2.8" height="2" material="src: #img4"></a-plane>
 
-  <!-- ========================= -->
-  <!-- 🚛 BANDA TRANSPORTADORA -->
-  <!-- ========================= -->
-
-  <!-- Base de la banda -->
+  <!-- 🚛 BANDA -->
   <a-box position="0 0.3 6" depth="6" height="0.3" width="2" color="#333"></a-box>
 
   <!-- Rodillos -->
   <a-cylinder position="0 0.5 3.5" radius="0.3" height="2" rotation="0 0 90" color="#666"></a-cylinder>
   <a-cylinder position="0 0.5 8.5" radius="0.3" height="2" rotation="0 0 90" color="#666"></a-cylinder>
 
-  <!-- Objetos en movimiento -->
-  <a-box position="-0.5 0.8 8" color="red">
-    <a-animation attribute="position"
-      to="-0.5 0.8 3"
-      dur="3000"
-      repeat="indefinite">
-    </a-animation>
+  <!-- 📦 OBJETOS (ANIMACIÓN CORREGIDA) -->
+  <a-box position="-0.5 0.8 8" color="red"
+    animation="property: position; to: -0.5 0.8 3; dur: 3000; loop: true">
   </a-box>
 
-  <a-box position="0.5 0.8 10" color="blue">
-    <a-animation attribute="position"
-      to="0.5 0.8 3"
-      dur="4000"
-      repeat="indefinite">
-    </a-animation>
+  <a-box position="0.5 0.8 10" color="blue"
+    animation="property: position; to: 0.5 0.8 3; dur: 4000; loop: true">
   </a-box>
 
-  <a-sphere position="0 0.8 12" radius="0.3" color="yellow">
-    <a-animation attribute="position"
-      to="0 0.8 3"
-      dur="3500"
-      repeat="indefinite">
-    </a-animation>
+  <a-sphere position="0 0.8 12" radius="0.3" color="yellow"
+    animation="property: position; to: 0 0.8 3; dur: 3500; loop: true">
   </a-sphere>
 
   <!-- 🌌 Fondo -->
@@ -117,4 +97,3 @@
 
   </body>
 </html>
-
